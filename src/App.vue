@@ -1,29 +1,11 @@
 <script setup lang="ts">
-import { getArrayFirstElemenet, objectForEach } from './utils'
-import HelloWorld from './components/HelloWorld.vue'
-console.log(getArrayFirstElemenet([0, 1]));
-
-objectForEach({ id: 1, da: 2 }, (value, key) => {
-  console.log(key)
-  console.log(value)
-})
-objectForEach([1, 2], (value, key) => {
-  console.log(key)
-  console.log(value)
-})
-
+import { useState } from './hooks'
+const [ state, setState ] = useState(0)
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  {{ state }}
+  <button @click="setState(state+ 1)"> setState </button>
 </template>
 
 <style scoped>

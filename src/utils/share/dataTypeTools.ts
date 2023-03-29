@@ -10,7 +10,11 @@ enum DataType {
   DATE = 'Date',
   BOOLEAN = 'Boolean',
   STRING = 'String',
-  NUMBER = 'Numbber'
+  NUMBER = 'Numbber',
+  REGEXP = 'RegExp',
+  FUNCTION = 'Function',
+  MAP = 'Map',
+  SET = 'Set',
 }
 
 
@@ -21,29 +25,44 @@ function getToStringResult (data: any): string {
 }
 
 export function isObject (data: any) {
-  return getToStringResult(data) == DataType.OBJECT
+  return getToStringResult(data) === DataType.OBJECT
 } 
 
 export function isArray (data: any) {
-  return getToStringResult(data) == DataType.ARRAY
+  return getToStringResult(data) === DataType.ARRAY
 } 
 
 export function isNull (data: any) {
-  return getToStringResult(data) == DataType.NULL
+  return getToStringResult(data) === DataType.NULL
 } 
 
 export function isDate (data: any) {
-  return getToStringResult(data) == DataType.DATE
+  return getToStringResult(data) === DataType.DATE
 } 
 
 export function isUndefin (data: any) {
-  return getToStringResult(data) == DataType.UNDEFINED
+  return getToStringResult(data) === DataType.UNDEFINED
 } 
 
 export function isBoolean (data: any) {
-  return getToStringResult(data) == DataType.BOOLEAN
+  return getToStringResult(data) === DataType.BOOLEAN
 } 
 
 export function isString (data: any) {
-  return getToStringResult(data) == DataType.STRING
+  return getToStringResult(data) === DataType.STRING
+} 
+
+export function isRegExp (data: any) {
+  return getToStringResult(data) === DataType.REGEXP
+} 
+
+export function isFunction (data: any) {
+  return getToStringResult(data) === DataType.FUNCTION
+} 
+export function isMap (data: any) {
+  return getToStringResult(data) === DataType.MAP
+} 
+
+export function isSet (data: any) {
+  return getToStringResult(data) === DataType.SET
 } 
