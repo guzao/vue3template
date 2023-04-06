@@ -1,4 +1,3 @@
-
 type ObjectForEachCallback <T> = (value: T[Extract<keyof T, string>], kek:  Extract<keyof T, string>, _this: T) => void
 
 /**
