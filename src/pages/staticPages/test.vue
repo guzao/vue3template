@@ -1,6 +1,8 @@
 <template>
   <div>
-    <n-button> tets </n-button>
+    <n-card title="" size="medium">
+      <n-button> tets </n-button>
+    </n-card>
   </div>
 </template>
 
@@ -8,6 +10,5 @@
 
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
 </style>
