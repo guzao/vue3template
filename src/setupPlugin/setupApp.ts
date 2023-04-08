@@ -3,7 +3,7 @@ import App from '@/App.vue'
 import { setupAssets } from './setupAssets'
 import { setupRouter } from './setupRouter'
 import { setupComponents } from './setupComponents'
-
+import { setupGlobalErrorHandle } from './setupGlobalErrorHandle'
 
 /**
  * 初始化应用
@@ -16,6 +16,8 @@ export function setupApp () {
   const appInstance = createApp(App)
 
   setupAssets()
+
+  setupGlobalErrorHandle(appInstance)
 
   setupComponents(appInstance)
 
