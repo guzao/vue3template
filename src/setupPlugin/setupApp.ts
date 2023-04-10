@@ -7,17 +7,19 @@ import { setupGlobalErrorHandle } from './setupGlobalErrorHandle'
 
 /**
  * 初始化应用
+ * - 注册vue异常处理事件
+ * - 加载 css 样式资源
+ * - 注册组件
  * - 注册路由
  * - 注册全局存储
- * - 加载 css 样式资源
 */
 export function setupApp () {
 
   const appInstance = createApp(App)
 
-  setupAssets()
-
   setupGlobalErrorHandle(appInstance)
+
+  setupAssets()
 
   setupComponents(appInstance)
 

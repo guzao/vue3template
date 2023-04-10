@@ -10,7 +10,8 @@ enum DataType {
   DATE = 'Date',
   BOOLEAN = 'Boolean',
   STRING = 'String',
-  NUMBER = 'Numbber'
+  NUMBER = 'Numbber',
+  WINDOW = 'Window'
 }
 
 
@@ -46,4 +47,7 @@ export function isBoolean (data: any) {
 
 export function isString (data: any) {
   return getToStringResult(data) == DataType.STRING
+} 
+export function isWindow (data: any) {
+  return getToStringResult(data) == DataType.WINDOW
 } 

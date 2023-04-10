@@ -1,22 +1,14 @@
+import { ref } from 'vue'
 import { http } from './index' 
 
 
-type UsePostConfigType = {
-  url: string;
-  data: object
-}
-export function usePost (config: UsePostConfigType) {
-  const { url, data } = config
-  return http.post(url, data)
+export function usePostMethod <T = any> (url: string, data?: object) {
+  return http.post<any, ResponseDataType<T>>(url, data)
 }
 
 
-
-type UseGetConfigType = {
-  url: string;
-  params: object
-}
-export function useGet (config: UseGetConfigType) {
-  const { url, params } = config
-  return http.get(url, params)
+export function useGetMethod <T = any> (url: string, params?: object) {
+  return http.get<any, ResponseDataType<T>>(url, {
+    params
+  })
 }

@@ -1,49 +1,56 @@
-import type { App, ComponentPublicInstance } from 'vue' 
+import type { App, ComponentPublicInstance } from 'vue'
+
+
+
 /**
  * vue 错误处理
 */
-export function setupGlobalErrorHandle (app: App<Element>) {
-  app.config.errorHandler = (err: unknown, instance: ComponentPublicInstance | null, info: string) => {
-    
-    const arrorInstance = err as Error
+export const setupGlobalErrorHandle = (app: App<Element>) => app.config.errorHandler = errorHandle
 
-    errorHandle(arrorInstance, instance, info)
+/** 获取错误类型 */
+const getErrorType = (error: Error): ErrorType => error.name as any
 
-  } 
+/** 对异常做处理 */
+const errorHandle = (error: any, instance: ComponentPublicInstance | null, info: string) => {
+  const errorInstance = error as Error
+  const errorType = getErrorType(errorInstance)
+  const errorTypeHandle = errorTypeHandleMap[errorType]
+  errorTypeHandle && errorTypeHandle(errorInstance, instance, info)
 }
 
 
 
-type errorHandleFunction = (error: Error, instance: ComponentPublicInstance | null, info: string) => void
-
-const errorHandleMap: Record<'TypeError' | 'ReferenceError' | 'RangeError' | 'SyntaxError' , errorHandleFunction> = {
-  ReferenceError: (error: Error) => {
+const errorTypeHandleMap: Record<ErrorType, ErrorHandleFunction<ComponentPublicInstance>> = {
+  /**
+  * https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError
+  */
+  ReferenceError: (error, instance, info) => {
     console.log('使用到了未定义的变量')
+    console.log(error)
+    // TODO some thing
   },
-  TypeError: (error: Error) => {
+  /**
+   * https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/TypeError
+  */
+  TypeError: (error, instance, info) => {
     console.log('类型错误，当前类型使用了，不存在自身的属性或方法')
+    console.log(error)
+    // TODO some thing
   },
-  RangeError: (error: Error) => {
+  /**
+   * https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RangeError
+  */
+  RangeError: (error, instance, info) => {
     console.log('使用到了未定义的变量')
+    console.log(error)
+    // TODO some thing
   },
-  SyntaxError: (error: Error) => {
-    console.log('系统错误')
+  /**
+   * https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError
+  */
+  SyntaxError: (error, instance, info) => {
+    console.log('语法错误')
+    console.log(error)
+    // TODO some thing
   },
 }
-
-
-type ErrorType = 'TypeError' | 'ReferenceError' | 'RangeError' | 'SyntaxError'
-
-const getErrorType = (error: Error): ErrorType  => error.name as any
-
-const errorHandle = (arrorInstance: Error, instance: ComponentPublicInstance | null, info: string) => {
-  const errorType = getErrorType(arrorInstance)
-  const errorHandle = errorHandleMap[errorType] 
-  errorHandle && errorHandle(arrorInstance, instance, info)
-}
-
-
-
-
-
-
